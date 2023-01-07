@@ -8,6 +8,8 @@ import 'package:tic_tac_toe/screens/game_screen.dart';
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
   Socket get socketClient => _socketClient;
+
+  //EMITS
   void createRoom(String nickname) {
     if (nickname.isNotEmpty) {
       _socketClient.emit('createRoom', {
@@ -16,6 +18,7 @@ class SocketMethods {
     }
   }
 
+  //LISTENERS
   void createRoomSuccessListner(BuildContext context) {
     _socketClient.on("createRoomSuccess", (room) {
       Provider.of<RoomDataProvider>(context, listen: false)

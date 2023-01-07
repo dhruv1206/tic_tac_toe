@@ -36,47 +36,51 @@ class _TicTacToeBoardState extends State<TicTacToeBoard> {
         maxHeight: size.height * 0.7,
         maxWidth: 500,
       ),
-      child: GridView.builder(
-        itemCount: 9,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        itemBuilder: (ctx, index) {
-          return GestureDetector(
-            onTap: () {
-              tapped(
-                index,
-                roomDataProvider,
-              );
-              print("TAPPED");
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white24,
+      child: AbsorbPointer(
+        absorbing: roomDataProvider.roomData["turn"]["socketID"] !=
+            _socketMethods.socketClient.id,
+        child: GridView.builder(
+          itemCount: 9,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemBuilder: (ctx, index) {
+            return GestureDetector(
+              onTap: () {
+                tapped(
+                  index,
+                  roomDataProvider,
+                );
+                print("TAPPED");
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white24,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Text(
-                  roomDataProvider.displayElements[index],
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 100,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 40,
-                        color: roomDataProvider.displayElements[index] == "O"
-                            ? Colors.red
-                            : Colors.blue,
-                      ),
-                    ],
+                child: Center(
+                  child: Text(
+                    roomDataProvider.displayElements[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 100,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 40,
+                          color: roomDataProvider.displayElements[index] == "O"
+                              ? Colors.red
+                              : Colors.blue,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -27,7 +27,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     var roomDataProvider = Provider.of<RoomDataProvider>(context);
     return Scaffold(
-      body: roomDataProvider.getRoomData["isJoin"]
+      body: roomDataProvider.roomData["isJoin"]
           ? const WaitingLobby()
           : SafeArea(
               child: Column(
